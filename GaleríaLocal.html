@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Local | Portafolio Web</title>
+    <style>
+        /* ==========================================================================
+           Variables y Paleta de Colores Actualizada (Estilo Tablero Oscuro)
+           ========================================================================== */
+        :root {
+            --bg-base: #242B21;       /* Fondo principal gris-verdoso */
+            --bg-surface: #2b3335;    /* Fondo de tarjetas ligeramente más oscuro */
+            --text-primary: #f1f5f9;  /* Texto principal claro */
+            --text-muted: #9baaa6;    /* Texto secundario atenuado */
+            --accent: #8bbfae;        /* Acento verde suave */
+            --accent-hover: #719d8e;  /* Acento verde al pasar el cursor (hover) */
+            --border: #495658;        /* Bordes sutiles */
+            --radius-md: 0.75rem;
+            --radius-full: 9999px;
+            --transition: all 0.3s ease;
+        }
+
+        /* ==========================================================================
+           Reset y Configuración Base
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           Header & Navegación
+           ========================================================================== */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            /* Degradado ligero manteniendo el soporte para el desenfoque del fondo */
+            background: linear-gradient(90deg, rgba(73, 86, 88, 0.9) 0%, rgba(43, 51, 53, 0.9) 100%);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .main-nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ==========================================================================
+           Layout de la Página del Proyecto
+           ========================================================================== */
+        .project-page {
+            padding: 4rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Cuadrícula de 2 columnas para el contenido */
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ==========================================================================
+           Columna Izquierda: Información de Texto
+           ========================================================================== */
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .project-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: -0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ==========================================================================
+           Columna Derecha: Contenido Multimedia (Imagen, Video, Botón)
+           ========================================================================== */
+        .project-media {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-visual {
+            background-color: var(--bg-surface);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            display: block;
+        }
+
+        /* Contenedor responsivo para el iframe de YouTube (Aspect Ratio 16:9) */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background-color: #000; /* Fondo negro por si tarda en cargar */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .download-btn {
+            display: block; /* Ocupa todo el ancho disponible en la columna */
+            background-color: var(--accent);
+            color: var(--bg-base);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .download-btn:hover {
+            background-color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header de Navegación -->
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Dev<span>.</span></a>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+                    <li><a href="index.html#proyectos">Proyectos</a></li>
+                    <li><a href="index.html#blogs">Blogs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Principal del Proyecto -->
+    <main class="container project-page">
+        
+        <!-- Enlace para regresar -->
+        <a href="index.html" class="back-link">&larr; Volver al portafolio</a>
+
+        <!-- Título del Proyecto -->
+        <header class="project-header">
+            <h1>Galerías local app</h1>
+        </header>
+
+        <!-- Contenido Dividido en 2 Columnas -->
+        <article class="project-content">
+            
+            <!-- Izquierda: Textos -->
+            <div class="project-info">
+                <!-- Sección de Descripción -->
+                <h3>Descripción</h3>
+                <p>Galería Local es una aplicación web de escritorio portátil diseñada para organizar, normalizar y explorar colecciones personales de fotografías y videos de forma 100% privada y sin depender de servicios en la nube. Al ejecutar el programa, se levanta un servidor local que procesa los archivos desde una carpeta de origen, elimina duplicados mediante verificación criptográfica (SHA-256), estandariza los formatos a JPG y MP4 (incluyendo archivos HEIC de iPhone), extrae fechas y coordenadas GPS para geolocalizar ubicaciones automáticamente, y genera miniaturas optimizadas para una navegación fluida con carga diferida y búsqueda instantánea por fecha, lugar o tipo de archivo.</p>
+                
+                <!-- Sección de Documentación -->
+                <h3>Instrucciones de uso</h3>
+                <p>Ejecución inicial: Haz doble clic en Galeria.exe. El programa iniciará en segundo plano (sin ventana de consola) y abrirá automáticamente tu navegador web en la interfaz principal.</p>   
+		<p>Configuración de carpetas: Al abrirse por primera vez, aparecerá una ventana de configuración donde deberás ingresar dos rutas locales: Bandeja de entrada: La carpeta donde tienes tus fotos y videos sin organizar. Los archivos originales en esta carpeta nunca se borran ni se modifican.   
+Bóveda: La carpeta de destino donde el sistema creará su base de datos (Galeria.sqlite) y organizará las copias procesadas por Año/Mes junto con sus miniaturas.</p>
+		<p>Importación y sincronización: Haz clic en el botón "Sincronizar Galería" en la esquina superior derecha. El sistema procesará los archivos nuevos en segundo plano (normalización, creación de miniaturas y geolocalización) mientras te permite seguir navegando.</p>
+		<p>Exploración y filtros: Utiliza la barra superior para filtrar tus recuerdos por ciudad o país, rango de fechas, origen de fecha (EXIF o sistema) o tipo de archivo, y haz clic en cualquier tarjeta para abrir el visor en alta resolución.   Cierre seguro: Para cerrar la aplicación completamente y liberar el puerto local, abre el menú ⚙ Configuración y presiona el botón "Apagar aplicación" antes de cerrar la pestaña del navegador. </p>
+            </div>
+
+            <!-- Derecha: Imagen, Video y Botón -->
+            <div class="project-media">
+                
+                <!-- 1. Imagen de Referencia -->
+                <figure class="project-visual">
+                    <img src="https://plain-wnam-prod-public.komododecks.com/202611/23/xHBs9Plo1AaIvZMsYqBC/image.png" alt="modo claro" class="project-image">
+                </figure>
+		<figure class="project-visual">
+                    <img src="https://plain-wnam-prod-public.komododecks.com/202611/23/DFQW0tsBK6tBmNAmO6Jf/image.png" alt="modo oscuro" class="project-image">
+                </figure>
+
+                <!-- 2. Video de YouTube embebido -->
+                <div class="video-container">
+                    <!-- Cambia "TU_ID_DE_VIDEO" por la id real, ej: src="https://www.youtube.com/embed/dQw4w9WgXcQ" -->
+                    <iframe 
+    			src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+    			title="Demostración del proyecto" 
+    			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    			allowfullscreen>
+		    </iframe>
+                </div>
+
+                <!-- 3. Botón de Descarga -->
+                <a href="https://github.com/juanjocarvajal675-web/Juanjocarvajacademic.github.io/releases/download/Apps/Galeria.exe" class="download-btn" download>Descargar Proyecto</a>
+            </div>
+
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Juanjo Carvajal.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
