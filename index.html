@@ -6,15 +6,15 @@
     <title>Perfil | Portafolio Web</title>
     <style>
         /* ==========================================================================
-           Variables y Modo Oscuro por Defecto
+           Variables y Paleta de Colores Actualizada (Estilo Tablero Oscuro)
            ========================================================================== */
         :root {
-            --bg-base: #0f172a;       /* Fondo principal (Slate 900) */
-            --bg-surface: #1e293b;    /* Fondo de tarjetas (Slate 800) */
-            --text-primary: #f8fafc;  /* Texto principal (Slate 50) */
-            --text-muted: #94a3b8;    /* Texto secundario (Slate 400) */
-            --accent: #38bdf8;        /* Color de acento (Sky 400) */
-            --border: #334155;        /* Bordes (Slate 700) */
+            --bg-base: #242B21;       /* Fondo principal gris-verdoso */
+            --bg-surface: #2b3335;    /* Fondo de tarjetas ligeramente más oscuro */
+            --text-primary: #f1f5f9;  /* Texto principal claro */
+            --text-muted: #9baaa6;    /* Texto secundario atenuado */
+            --accent: #8bbfae;        /* Acento verde suave */
+            --border: #495658;        /* Bordes sutiles */
             --radius-md: 0.75rem;
             --radius-full: 9999px;
             --transition: all 0.3s ease;
@@ -62,7 +62,8 @@
            ========================================================================== */
         .site-header {
             border-bottom: 1px solid var(--border);
-            background-color: rgba(15, 23, 42, 0.9);
+            /* Degradado ligero manteniendo el soporte para el desenfoque del fondo */
+            background: linear-gradient(90deg, rgba(73, 86, 88, 0.9) 0%, rgba(43, 51, 53, 0.9) 100%);
             position: sticky;
             top: 0;
             z-index: 10;
@@ -285,7 +286,7 @@
                     <article class="card">
                         <h3>Operaciones de nucleótidos</h3>
                         <p>Script de python que te permite hacer las operaciones básicas del dogma central de la biología, apartir de una cadena de nucleótidos, se recomienda leer la domentación del proyecto.</p>
-                        <a href="proyectoADN.html" class="card-link">Ver proyecto &rarr;</a>
+                        <a href="#" class="card-link">Ver proyecto &rarr;</a>
                     </article>
                 </div>
             </section>
@@ -313,7 +314,7 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2024 Alex Dev. Construido con HTML semántico y CSS puro.</p>
+            <p>&copy; 2026 Juanjo Carvajal.</p>
         </div>
     </footer>
 
